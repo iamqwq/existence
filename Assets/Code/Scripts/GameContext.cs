@@ -1,26 +1,17 @@
-using System.Collections.Generic;
-using Code.Scripts.Entity;
-using Code.Scripts.Manager;
+using Code.Scripts.Manager.Datas;
+using Code.Scripts.Manager.Objects;
 using UnityEngine;
 
 namespace Code.Scripts {
     
-    public class GameContext {
+    public class GameContext : MonoBehaviour {
 
-        public static GameContext Instance { get; private set; }  = new();
+        public static GameContext Instance { get; private set; }
 
-        // Entity data
-        // ! List<Room> Here should be Graph<Room>
-        public List<Room> Rooms = new();
-        
-        public List<Monster> Monsters = new();
-        
-        // In-Game objects
-        public GameObject RootObject;
-        
-        public List<GameObject> RoomObjects;
-        
-        
-
+        private void Awake() {
+            Instance = this;
+            DataManager.Init();
+            ObjectManager.Init();
+        }
     }
 }

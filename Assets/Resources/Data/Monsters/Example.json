@@ -1,0 +1,12 @@
+{
+    "name": "Entity-1",
+    "identifier": "0",
+    "path": [
+        { "room": "5", "stay": 1 },
+        { "room": "4", "stay": 1 },
+        { "room": "3", "stay": 1 },
+        { "room": "7", "stay": 1 },
+        { "room": "0", "stay": 1 }
+    ],
+    "spawn": "8"
+}

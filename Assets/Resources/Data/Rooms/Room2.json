@@ -1,0 +1,8 @@
+{
+    "name": "Room2",
+    "index": "2",
+    "connected": [
+        "1",
+        "3"
+    ]
+}

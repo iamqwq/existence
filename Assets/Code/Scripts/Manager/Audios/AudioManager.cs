@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace Code.Scripts.Manager.Audios {
     
-    public class AudioManager {
+    public static class AudioManager {
         
-        public static AudioManager Instance { get; private set; } = new();
 
-        public void Register(string name, GameObject source, Audio audio) {
-            
-        }
         
-        private Dictionary<string, Audio> _audioDict = new();
+        private static Dictionary<string, AudioData> _audioDict = new();
         
-        public void Play(string name, AudioSettings settings) {
+        public static void Register(string name, GameObject source, AudioData audioData) {
+             
+        }       
+        
+        public static void Play(string name, AudioSettings settings) {
             var audio = _audioDict[name];
             // audio.source.clip = 
             //     audio.randomSettings.enable ?
