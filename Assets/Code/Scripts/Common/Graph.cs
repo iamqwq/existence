@@ -169,4 +169,56 @@ namespace Code.Scripts.Common {
             Debug.Log($"Opened connectivity between {source.index} and {target.index}.");
         }
     }
+
+    // 检测两节点是否直接连通
+    public bool CheckConnectivity(Room source, Room target)
+    {
+        if (adjacencyList[source.Index].Contains(target.Index) && adjacencyList[target.Index].Contains(source.Index))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    // 阻断两个连通的节点
+    public void BlockConnectivity(Room source, Room target)
+    {
+        if (!CheckConnectivity(source, target))
+        {
+            Debug.Log("Nodes are already disconnected.");
+            return;
+        }
+
+        if (adjacencyList[source.Index].Contains(target.Index))
+        {
+            adjacencyList[source.Index].Remove(target.Index);
+        }
+        if (adjacencyList[target.Index].Contains(source.Index))
+        {
+            adjacencyList[target.Index].Remove(source.Index);
+        }
+
+        Debug.Log($"Blocked connectivity between {source.Index} and {target.Index}.");
+    }
+
+    // 连接两个节点
+    public void OpenConnectivity(Room source, Room target)
+    {
+        if (CheckConnectivity(source, target))
+        {
+            Debug.Log("Nodes are already connected.");
+            return;
+        }
+
+        if (!adjacencyList[source.Index].Contains(target.Index))
+        {
+            adjacencyList[source.Index].Add(target.Index);
+        }
+        if (!adjacencyList[target.Index].Contains(source.Index))
+        {
+            adjacencyList[target.Index].Add(source.Index);
+        }
+
+        Debug.Log($"Opened connectivity between {source.Index} and {target.Index}.");
+    }
 }
