@@ -116,5 +116,57 @@ namespace Code.Scripts.Common {
             path.Reverse();
             return path;
         }
+
+        // 检测两节点是否直接连通
+        public bool CheckConnectivity(RoomData source, RoomData target)
+        {
+            if (_adjacencyList[source.index].Contains(target.index) && _adjacencyList[target.index].Contains(source.index))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        // 阻断两个连通的节点
+        public void BlockConnectivity(RoomData source, RoomData target)
+        {
+            if (!CheckConnectivity(source, target))
+            {
+                Debug.Log("Nodes are already disconnected.");
+                return;
+            }
+
+            if (_adjacencyList[source.index].Contains(target.index))
+            {
+                _adjacencyList[source.index].Remove(target.index);
+            }
+            if (_adjacencyList[target.index].Contains(source.index))
+            {
+                _adjacencyList[target.index].Remove(source.index);
+            }
+
+            Debug.Log($"Blocked connectivity between {source.index} and {target.index}.");
+        }
+
+        // 连接两个节点
+        public void OpenConnectivity(RoomData source, RoomData target)
+        {
+            if (CheckConnectivity(source, target))
+            {
+                Debug.Log("Nodes are already connected.");
+                return;
+            }
+
+            if (!_adjacencyList[source.index].Contains(target.index))
+            {
+                _adjacencyList[source.index].Add(target.index);
+            }
+            if (!_adjacencyList[target.index].Contains(source.index))
+            {
+                _adjacencyList[target.index].Add(source.index);
+            }
+
+            Debug.Log($"Opened connectivity between {source.index} and {target.index}.");
+        }
     }
 }
